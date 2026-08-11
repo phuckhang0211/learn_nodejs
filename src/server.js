@@ -11,9 +11,12 @@ const host = process.env.HOST_NAME;
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+//config static file
+app.use(express.static(path.join(__dirname, "public"))); // routes đến các đường đẫn có trong public trước
+
 // khai báo route
 app.get("/", (req, res) => {
-  //   res.send("Hello world!");
+  //   res.send("Hello Khang");
   res.render("xample.ejs");
 });
 
