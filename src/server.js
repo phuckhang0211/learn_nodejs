@@ -1,32 +1,19 @@
+require("dotenv").config();
 const express = require("express");
 const path = require("path");
-require("dotenv").config();
+const configViewEngine = require("./config/viewEngine.js");
 
-// import express from 'express'; //es modules
+const webRoutes = require("./routes/web.js");
 const app = express();
 const port = process.env.PORT || 3100;
 const host = process.env.HOST_NAME;
 
-// config template engine
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
-
+//config view engine
 //config static file
-app.use(express.static(path.join(__dirname, "public"))); // routes đến các đường đẫn có trong public trước
+configViewEngine(app);
 
-// khai báo route
-app.get("/", (req, res) => {
-  //   res.send("Hello Khang");
-  res.render("xample.ejs");
-});
-
-app.get("/abc", (req, res) => {
-  res.send("check ABC");
-});
-
-app.get("/test", (req, res) => {
-  res.send("<h1>Heeloo Khangg</h1>");
-});
+// Khai báo routes
+app.use("/", webRoutes);
 
 app.listen(port, host, () => {
   console.log("Server is running ...");
