@@ -3,8 +3,9 @@ const getHomepage = (req, res) => {
 };
 
 const getTest = (req, res) => {
-  res.render("xample");
+  res.render("xample.ejs");
 };
+
 module.exports = {
   getHomepage,
   getTest,
