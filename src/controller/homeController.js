@@ -1,13 +1,17 @@
 const connection = require("../config/database.js");
-const { getAllUser } = require("../services/CRUD.js");
+const { getAllUser, getUserById, editUser } = require("../services/CRUD.js");
 
 const getHomepage = async (req, res) => {
   let result = await getAllUser();
   return res.render("home.ejs", { listUsers: result });
 };
 
-const getEdit = (req, res) => {
-  res.render("edit.ejs");
+const getEdit = async (req, res) => {
+  const user_id = req.params.user_id;
+  let result = await getUserById(user_id);
+  //   console.log("check: ", result);
+  let user = result && result.length > 0 ? result[0] : {};
+  res.render("edit.ejs", { user: user });
 };
 
 const getTest = (req, res) => {
@@ -52,10 +56,23 @@ const postCreateUser = async (req, res) => {
   //   console.log("check: ", result);
 };
 
+const postEditUser = async (req, res) => {
+  let id = req.body.id;
+  let email = req.body.email;
+  let name = req.body.name;
+  let city = req.body.city;
+
+  await editUser(id, email, name, city);
+
+  let user = await getAllUser();
+  res.render("home.ejs", { listUsers: user });
+};
+
 module.exports = {
   getHomepage,
   getTest,
   postCreateUser,
   getCreate,
   getEdit,
+  postEditUser,
 };

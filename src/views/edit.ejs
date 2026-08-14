@@ -21,16 +21,32 @@
               <legend>Form edit user</legend>
 
               <div class="input-group">
+                <input type="hidden" name="id" value="<%= user.id%>" />
                 <label for="">Email: </label>
-                <input type="text" name="email" id="emailId" />
+                <input
+                  type="text"
+                  name="email"
+                  id="emailId"
+                  value="<%= user.email %>"
+                />
               </div>
               <div class="input-group">
                 <label for="">Name: </label>
-                <input type="text" name="name" id="nameId" />
+                <input
+                  type="text"
+                  name="name"
+                  id="nameId"
+                  value="<%= user.name %>"
+                />
               </div>
               <div class="input-group">
                 <label for="">City: </label>
-                <input type="text" name="city" id="cityId" />
+                <input
+                  type="text"
+                  name="city"
+                  id="cityId"
+                  value="<%= user.city %>"
+                />
               </div>
               <div class="button">
                 <button>SAVE</button>

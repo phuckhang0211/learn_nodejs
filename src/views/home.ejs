@@ -25,14 +25,14 @@
               <th>CITY</th>
               <th>ACTION</th>
             </tr>
-            <% for (let i= 1; i < listUsers.length; i++) { %>
+            <% for (let i= 0; i < listUsers.length; i++) { %>
             <tr>
               <td><%= listUsers[i].id %></td>
               <td><%= listUsers[i].email %></td>
               <td><%= listUsers[i].name %></td>
               <td><%= listUsers[i].city %></td>
               <td>
-                <a href="/edit?id= <%= listUsers[i].id %>">EDIT</a>
+                <a href="/edit/<%= listUsers[i].id %>">EDIT</a>
                 <button>DELETE</button>
               </td>
             </tr>
