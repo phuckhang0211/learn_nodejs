@@ -21,10 +21,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/", webRoutes);
 
 //simple querry
-connection.query("SELECT * FROM Users u", function (err, results, fields) {
-  console.log(">>>results: ", results);
-  console.log("fields =", fields);
-});
+// connection.query("SELECT * FROM Users u", function (err, results, fields) {
+//   console.log(">>>results: ", results);
+//   console.log("fields =", fields);
+// });
 
 app.listen(port, host, () => {
   console.log("Server is running ...");
