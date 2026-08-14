@@ -1,34 +1,61 @@
 const connection = require("../config/database.js");
+const { getAllUser } = require("../services/CRUD.js");
 
-const getHomepage = (req, res) => {
-  return res.render("home.ejs");
+const getHomepage = async (req, res) => {
+  let result = await getAllUser();
+  return res.render("home.ejs", { listUsers: result });
+};
+
+const getEdit = (req, res) => {
+  res.render("edit.ejs");
 };
 
 const getTest = (req, res) => {
   res.render("xample.ejs");
 };
 
-const postCreateUser = (req, res) => {
+const getCreate = (req, res) => {
+  res.render("create.ejs");
+};
+
+const postCreateUser = async (req, res) => {
   //   console.log(">>> req.body: ", req.body);
   let email = req.body.email;
   let name = req.body.name;
   let city = req.body.city;
-
   //   console.log("email= ", email, "name= ", name, "city= ", city);
-
   //   let {email, name, city} = req.body;
   //   res.send("Create user");
-  connection.query(
+  //   connection.query(
+  //     "INSERT INTO Users (email, name, city) VALUES (?, ?, ?)",
+  //     [email, name, city],
+  //     (err, results) => {
+  //       res.send("Created user succeed");
+  //     },
+  //   );
+
+  let [result, fields] = await connection.query(
     "INSERT INTO Users (email, name, city) VALUES (?, ?, ?)",
     [email, name, city],
-    (err, results) => {
-      res.send("Created user succeed");
-    },
   );
+
+  console.log(">>>check results: ", fields);
+
+  res.send("Created user succeed");
+
+  //   connection.query("SELECT * FROM Users u", function (err, results, fields) {
+  //     console.log(">>>results: ", results);
+  //     console.log("fields =", fields);
+  //   });
+
+  //   const [result, fields] = await connection.query("SELECT * FROM Users");
+  //   console.log("check: ", result);
 };
 
 module.exports = {
   getHomepage,
   getTest,
   postCreateUser,
+  getCreate,
+  getEdit,
 };
