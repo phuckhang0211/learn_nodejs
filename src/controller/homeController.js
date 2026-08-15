@@ -1,5 +1,10 @@
 const connection = require("../config/database.js");
-const { getAllUser, getUserById, editUser } = require("../services/CRUD.js");
+const {
+  getAllUser,
+  getUserById,
+  editUser,
+  deleteUser,
+} = require("../services/CRUD.js");
 
 const getHomepage = async (req, res) => {
   let result = await getAllUser();
@@ -68,6 +73,13 @@ const postEditUser = async (req, res) => {
   res.render("home.ejs", { listUsers: user });
 };
 
+const getDelete = async (req, res) => {
+  const id = req.params.id;
+  await deleteUser(id);
+
+  let user = await getAllUser();
+  res.render("home.ejs", { listUsers: user });
+};
 module.exports = {
   getHomepage,
   getTest,
@@ -75,4 +87,5 @@ module.exports = {
   getCreate,
   getEdit,
   postEditUser,
+  getDelete,
 };

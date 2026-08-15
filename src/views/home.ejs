@@ -33,7 +33,7 @@
               <td><%= listUsers[i].city %></td>
               <td>
                 <a href="/edit/<%= listUsers[i].id %>">EDIT</a>
-                <button>DELETE</button>
+                <a href="/delete/<%= listUsers[i].id %>">DELETE</a>
               </td>
             </tr>
             <% } %>
